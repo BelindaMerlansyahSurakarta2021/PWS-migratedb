@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import pws_b.penjualanbabe.exceptions.IllegalOrphanException;
 import pws_b.penjualanbabe.exceptions.NonexistentEntityException;
 import pws_b.penjualanbabe.exceptions.PreexistingEntityException;
@@ -27,11 +28,16 @@ public class CustomerJpaController implements Serializable {
     public CustomerJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("pws_b_penjualanbabe_jar_0.0.1-SNAPSHOTPU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+
+    public CustomerJpaController() {
+    }
+    
+    
 
     public void create(Customer customer) throws PreexistingEntityException, Exception {
         EntityManager em = null;
